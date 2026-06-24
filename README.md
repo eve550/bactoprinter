@@ -38,6 +38,26 @@ pip install pyserial jupyter ipywidgets numpy matplotlib
 jupyter notebook
 ```
 
+# Note: Pay attention to the index of the ports[] list. 
+An error message may appear (List Index Out of Range);
+In this case, refer to "Finding the Device-Port Name Mapping" below.
+
+### Finding the Device-Port Name Mapping
+# To get a list of connected and powered-on devices : 
+Enter the following command in the terminal: 
+```
+python -m serial.tools.list_ports
+```
+(ports[0] corresponds to the first port in the list…)
+
+# To find the specific port name of a single device
+Power on/Connect a single device and execute the following line of code in the terminal: 
+
+```
+python -m serial.tools.list_ports
+```
+This will return the name of the connected and powered-on port only.
+
 
 ### Next version
 Check the refactored next version in the dev branch.
