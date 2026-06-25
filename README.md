@@ -38,9 +38,9 @@ pip install pyserial jupyter ipywidgets numpy matplotlib
 jupyter notebook
 ```
 
-### Note : Pay attention to the index of the ports[] list. 
-An error message may appear (List Index Out of Range);
-In this case, refer to "Finding the Device-Port Name Mapping" below.
+> Note : Pay attention to the index of the ports[] list. 
+ An error message may appear (List Index Out of Range).
+  In this case, refer to "Finding the Device-Port Name Mapping" below.
 
 ### Finding the Device-Port Name Mapping
 ### To get a list of connected and powered-on devices : 
