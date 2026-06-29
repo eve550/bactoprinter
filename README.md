@@ -28,7 +28,7 @@ jupyter notebook
 > enderscope/bin/python3 -m ipykernel install –user –name=enderscope
 >
 >
-> And in Jupyter Notebook, you also have to change the kernel for enderscope
+> And in Jupyter Notebook, you also have to change the kernel for enderscope,
 > Go in core -> change core
 
 ### For Windows
@@ -58,7 +58,7 @@ Enter the following command in the terminal:
 ```
 python -m serial.tools.list_ports
 ```
-(ports[0] corresponds to the first port in the list…)
+
 
 ### To find the specific port name of a single device
 Power on/Connect a single device and execute the following line of code in the terminal: 
