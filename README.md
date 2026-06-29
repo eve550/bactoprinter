@@ -21,6 +21,16 @@ cd ~
 source enderscope/bin/activate
 jupyter notebook
 ```
+
+> Note : Pay attention to the kernel
+> In VSCode, you have to change the kernel, it has to be in enderscope.
+> If it doesn't exist, enter the following command in the terminal :
+> enderscope/bin/python3 -m ipykernel install –user –name=enderscope
+>
+>
+> And in Jupyter Notebook, you also have to change the kernel for enderscope
+> Go in core -> change core
+
 ### For Windows
 ### Installation
 
