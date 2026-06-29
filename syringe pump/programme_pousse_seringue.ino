@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include <AccelStepper.h> //importation bibliothèque
 
-int xDir = 5; // numéro broche step
-int xStep = 2;
+int xDir = 5; // numéro broche step sur driver x, broche direction
+int xStep = 2; // broche cadencement
 int enable = 8;
 
 AccelStepper xStepper(AccelStepper::DRIVER, xStep, xDir); // déclaration variable xstepper
@@ -19,9 +19,9 @@ long longueur_to_steps(float longueur) // fonction qui devra convertir la longue
 String inputString = "";
 bool stringComplete = false;
 
-void setup() {
+void setup() {   // il faut écrire x espace la distance en mm, c est une position absolue attention la position x=0 correspond à la position initiale
   Serial.begin(115200);
-  Serial.println("Welcome mate");
+  Serial.println("Hello");
   pinMode(xDir, OUTPUT);
   pinMode(xStep, OUTPUT);
   pinMode(enable, OUTPUT);
@@ -56,10 +56,10 @@ void serialEvent()
 {
   while (Serial.available())
   {
-    char inChar = (char)Serial.read();
-    if (inChar == '\n')
+    char inChar = (char)Serial.read(); // nom donne a la chaine de caractere
+    if (inChar == '\n' || inChar == '\r')// si il y a un saut a la ligne(entree dans arduino), dans le langage ASCII compte bien comme un unique caractère
     {
-      stringComplete = true;
+      stringComplete = true; // alors ce sera la fin du message
     }
     else
     {
@@ -84,6 +84,7 @@ void loop() {
     stringComplete = false;
   }
 }
+
 
 
 
