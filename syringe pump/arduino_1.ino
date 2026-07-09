@@ -1,29 +1,29 @@
-// Importation bibliotheque
+// Importations
 
 #include <Arduino.h>
 #include <AccelStepper.h> 
 
-// Numero des broches pour le pousse seringue A 
+// Pins
 
 int xDir = 5; 
 int xStep = 2; 
 int enable = 8; 
 
-// Declaration variables
+// Variables
 
 int CodeIn;
 AccelStepper xStepper(AccelStepper::DRIVER, xStep, xDir); 
-int microstepping = 16; // pas intermédiaires
+int microstepping = 16;
 
-// Convertit longueur qu'on veut en nombre de pas (longueur entre deux dents = 1mm -> un tour fait avanncer d'1mm)
+// Conversion
 long longueur_to_steps(float longueur) 
 {
   
-  long steps = (long)(longueur * 200 * microstepping/8) ; // 8 mm = longueur pour un tour
+  long steps = (long)(longueur * 200 * microstepping/8) ; // 1 rotation => 8 mm
   return steps;
 }
 
-// Debut du programme
+
 
 void setup() {   
   Serial.begin(115200);
@@ -33,38 +33,48 @@ void setup() {
   digitalWrite(enable, LOW);
   xStepper.setPinsInverted(false, false, true);
 
-  xStepper.setMaxSpeed(300); // Vitesse max (a changer)
-  xStepper.setAcceleration(300); // acceleration max (a changer)
+  xStepper.setMaxSpeed(300); // Speed : Steps per seconde
+  xStepper.setAcceleration(300); 
 }
 
-// Fait avancer le pousse seringue : C'est une position absolue dont l' origine est la position initiale
 
-void avancer()
-{   float position = 100; // Avance de 100 mm
+// Syringe pump A : go
+void to_go()
+{   float position = 100;
     long steps = longueur_to_steps(position); // Conversion
-    xStepper.moveTo(steps);
+    xStepper.move(steps);
 
 }
 
-// Fonction loop, repetee indefiniment, pour le moment que pour un pousse-seringue A
+// Syringe pump A : back off
+void to_back_off(){
+  float location = -50;
+  long steps_location = longueur_to_steps(location);
+  xStepper.move(steps_location); // position relative
+}
+
+
 
 void loop() {
-  if (Serial.available() > 0) { // Si il y a des donnees 
+  if (Serial.available() > 0) { 
     char CodeIn = Serial.read();
     if (CodeIn == 'A') { 
-      digitalWrite(enable, HIGH); // On lance le programme uniquement si la commande est A
-      avancer();}
+      digitalWrite(enable, HIGH); 
+      to_go();}
 
-      if (CodeIn == 'S'){
+    if (CodeIn == 'S'){
         xStepper.stop();
       }
-    else { 
+
+    if (CodeIn == 'R'){
+        digitalWrite(enable, HIGH);
+        to_back_off();
+      }
+ else { 
       
       digitalWrite(enable,LOW);}} 
 
   xStepper.run();
-
-
 }
 
 
