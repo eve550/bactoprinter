@@ -33,7 +33,7 @@ void setup() {
   digitalWrite(enable, LOW);
   xStepper.setPinsInverted(false, false, true);
 
-  xStepper.setMaxSpeed(300); // Speed : Steps per seconde
+  xStepper.setMaxSpeed(80); // Speed : Steps per seconde
   xStepper.setAcceleration(300); 
 }
 
