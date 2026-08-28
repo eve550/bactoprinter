@@ -74,3 +74,6 @@ python -m serial.tools.list_ports
 Power on/Connect a single device and execute the same line of code in the terminal.  
 This will return the name of the connected and powered-on port only.
 
+### Modify the printer step
+You need to open the 'enderscope.py' file, and access 'Panel' class. At the end, you can modify the step (in mm) in the line self.s.move_towards(b.description,1)
+
